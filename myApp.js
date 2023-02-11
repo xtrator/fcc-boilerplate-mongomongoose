@@ -6,7 +6,7 @@ mongoose.connect(process.env.MONGO_URI, {
   useUnifiedTopology: true,
 });
 
-let Person;
+let Person = require("./src/models/person.js");
 
 const createAndSavePerson = (done) => {
   done(null /*, data*/);
