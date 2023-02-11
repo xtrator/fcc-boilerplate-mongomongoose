@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const person = require("./src/models/person.js");
 require("dotenv").config();
 
 mongoose.connect(process.env.MONGO_URI, {
@@ -54,8 +55,17 @@ const findPersonById = (personId, done) => {
 
 const findEditThenSave = (personId, done) => {
   const foodToAdd = "hamburger";
-
-  done(null /*, data*/);
+  Person.findById(personId, (err, data) => {
+    if (err == null) {
+      data.favoriteFoods.push(foodToAdd);
+      data.markModified("favoriteFoods");
+      data.save((err, data) => {
+        if (err == null) {
+          done(null, data);
+        }
+      });
+    }
+  });
 };
 
 const findAndUpdate = (personName, done) => {
