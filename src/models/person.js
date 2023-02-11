@@ -1,7 +1,7 @@
 let mongoose = require("mongoose");
 
 let personSchema = new mongoose.Schema({
-  name: String, //required
+  name: { type: String, required: true }, //required
   age: Number,
   favoriteFoods: Array, //array of strings
 });
