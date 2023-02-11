@@ -1,4 +1,5 @@
 let mongoose = require("mongoose");
+let timestampPlugin = require("./plugins/timestamp.js");
 
 let personSchema = new mongoose.Schema({
   name: { type: String, required: true }, //required
@@ -22,5 +23,7 @@ personSchema.statics.getUsers = function () {
     });
   });
 };
+
+personSchema.plugin(timestampPlugin);
 
 module.exports = mongoose.model("Person", personSchema);
